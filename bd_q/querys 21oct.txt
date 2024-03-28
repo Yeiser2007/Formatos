@@ -1,0 +1,32 @@
+CREATE TABLE persona (numero SERIAL NOT NULL PRIMARY KEY,apellidos VARCHAR(50),direccion VARCHAR(50),telefono VARCHAR(20),fecha_nacim DATE);
+
+CREATE TABLE cliente (nro_cuenta BIGINT,estado VARCHAR(10),tipoCliente CHAR(1)) INHERITS (persona);
+
+
+ CREATE TABLE funcionario (cargo VARCHAR(25), departamento VARCHAR(25), fecha_ing DATE ) INHERITS (persona);
+
+CREATE TABLE cities (name text,population float,altitude int);
+
+CREATE TABLE capitals (state char(2)) INHERITS (cities);
+
+ INSERT INTO capitals VALUES ('LAS VEGAS', 646790,2174,'NV'),('MARIPOSA', 1159,1953,'CA'),('MADISON',269196,845,'MI'),('MEXICO',8855000,7349,'DF');
+
+ INSERT INTO capitals VALUES ('LAS VEGAS', 646790,2174,'NV'),('MARIPOSA', 1159,1953,'CA'),('MADISON',269196,845,'MI'),('MEXICO',8855000,7349,'DF');
+
+DELETE FROM capitals WHERE ctid NOT IN (SELECT min(ctid) FROM cities GROUP BY name);
+SELECT ctid, * FROM capitals ORDER BY name;
+CREATE TYPE rainbow AS ENUM ('red','orange','yellow','green','blue','purple');
+
+
+ CREATE TABLE my_colors (color rainbow,note text);
+
+CREATE FUNCTION get_color_note (rainbow) RETURNS text AS 'SELECT note FROM my_colors WHERE color = $1' LANGUAGE SQL;
+ CREATE TABLE sal_emp(name TEXT,pay_by_quarter integer [], shcedule text [][]);
+
+ INSERT INTO sal_emp VALUES ('Bill', '{20000,25000,25000}','{{ "breakfast", "consulting"},{"meeting","lunch"}}');
+
+ INSERT INTO sal_emp VALUES ('Carol', '{20000,25000,25000,25000}','{{ "breakfast", "consulting"},{"meeting","lunch"}}');
+
+INSERT INTO sal_emp VALUES ('Carol', '{10000,10000,10000,10000,5000}','{{ "meting", "lunch"},{"consulting","two"}}');
+
+INSERT INTO sal_emp VALUES ('Bill', '{10000,10000,10000,10000}','{{ "breakfast", "consulting"},{"meeting","lunch"}}');
